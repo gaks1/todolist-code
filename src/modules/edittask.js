@@ -12,8 +12,8 @@ const changeTask = (task, editInput) => {
 
 const editTask = (e) => {
   if (e.target.nodeName === 'LABEL') {
-    const taskDiv = e.target.closest('.task');
-    const task = tasks[taskDiv.getAttribute('id')];
+    const taskDiv = e.target.parentNode.parentNode;
+    const task = tasks[taskDiv.getAttribute('id') - 1];
     const editInput = document.createElement('input');
     editInput.value = task.description;
     e.target.parentNode.replaceChild(editInput, e.target);
