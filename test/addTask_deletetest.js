@@ -27,4 +27,8 @@ const deleteTask = (id, taskDivs, tasks) => {
     });
 };
 
-export { addTask, deleteTask };
+const storeTask = (tasks) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
+
+export { addTask, deleteTask, storeTask };
