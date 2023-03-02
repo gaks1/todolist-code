@@ -16,7 +16,6 @@ tasks.forEach((task) => {
   addTask(task);
 });
 
-
 divtasks.addEventListener('click', (e) => {
   if (e.target.nodeName === 'BUTTON') {
     const taskDivs = document.querySelectorAll('.task');
