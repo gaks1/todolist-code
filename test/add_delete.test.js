@@ -63,3 +63,43 @@ describe('storeTask', () => {
     expect(storedTasks[1].description).toBe('Buy groceries');
   });
 });
+
+describe('changeTask', () => {
+  const task = {
+    index: 1,
+    completed: false,
+    description: 'Do laundry',
+  };
+  const editdiv = document.createElement('div');
+  const editInput = document.createElement('input');
+  editdiv.appendChild(editInput);
+  editInput.value = 'Do laundry and clean room';
+  test('updates the task description and replaces the edit input with a label', () => {
+    changeTask(task, editInput);
+    expect(editdiv.firstChild.tagName).toBe('LABEL');
+    expect(editdiv.firstChild.textContent).toBe('Do laundry and clean room');
+    expect(task.description).toBe('Do laundry and clean room');
+    expect(editInput.parentNode).toBeFalsy();
+  });
+});
+
+describe('editTask', () => {
+  const edit = document.querySelector('.edit');
+  const tasks = [
+    { index: 1, completed: false, description: 'Do laundry' },
+  ]
+  addTask(tasks[0], edit);
+  storeTask(tasks);
+  const label = document.querySelector('label');
+  const e = new Event('click');
+  e.initEvent('click', true, true);
+  Object.defineProperty(e, 'target', { value: label });
+  editTask(e, tasks);
+  const editLabel = edit.querySelector('label');
+  const editInput = edit.querySelector('.er');
+  test('replaces the label element with an input element', () => {
+    expect(editLabel).toBeFalsy();
+    expect(editInput).toBeTruthy();
+    expect(editInput.value).toBe('Do laundry');
+  });
+});
