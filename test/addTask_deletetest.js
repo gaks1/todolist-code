@@ -53,12 +53,10 @@ const editTask = (e, tasks) => {
     editInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         changeTask(task, editInput);
-        console.log('here')
       }
     });
     editInput.addEventListener('blur', () => {
       changeTask(task, editInput);
-      console.log('here2')
     });
   }
 };
@@ -95,4 +93,6 @@ const buttonClear = (tasks, clear) => {
   storeTask(tasks);
 };
 
-export { addTask, deleteTask, storeTask, checked, buttonClear, editTask, changeTask };
+export {
+  addTask, deleteTask, storeTask, checked, buttonClear, editTask, changeTask,
+};

@@ -1,7 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { addTask, deleteTask, storeTask, changeTask, editTask, checked, buttonClear } from './addTask_deletetest.js';
+import {
+  addTask, deleteTask, storeTask, changeTask, editTask, checked, buttonClear,
+} from './addTask_deletetest.js';
 
 describe('addTask', () => {
   document.body.innerHTML = `
@@ -9,7 +11,7 @@ describe('addTask', () => {
       <div class="edit"></div>
       <div class="checked"></div>
       <div class="clear"></div>
-    `;;
+    `;
   const divtasks = document.querySelector('.tasks');
 
   test('creates a new task element and appends it to the tasks div', () => {
@@ -89,7 +91,7 @@ describe('editTask', () => {
   const edit = document.querySelector('.edit');
   const tasks = [
     { index: 1, completed: false, description: 'Do laundry' },
-  ]
+  ];
   addTask(tasks[0], edit);
   storeTask(tasks);
   const label = document.querySelector('label');
@@ -111,7 +113,7 @@ describe('checked', () => {
   const tasks = [
     { index: 1, completed: false, description: 'write a book' },
     { index: 2, completed: true, description: 'Try to read' },
-  ]
+  ];
   addTask(tasks[0], divchecked);
   addTask(tasks[1], divchecked);
   storeTask(tasks);
@@ -120,9 +122,9 @@ describe('checked', () => {
   event.initEvent('click', true, true);
   Object.defineProperty(event, 'target', { value: input[0] });
   input[0].checked = true;
-  checked(event, tasks)
+  checked(event, tasks);
 
-  const storedTasks = JSON.parse(localStorage.getItem('tasks'))
+  const storedTasks = JSON.parse(localStorage.getItem('tasks'));
   test('updates the task completed property to be true', () => {
     expect(tasks[0].completed).toBeTruthy();
     expect(storedTasks[0].completed).toBeTruthy();
@@ -131,9 +133,9 @@ describe('checked', () => {
   event2.initEvent('click', true, true);
   Object.defineProperty(event2, 'target', { value: input[1] });
   input[1].checked = false;
-  checked(event2, tasks)
+  checked(event2, tasks);
 
-  const storedTasks2 = JSON.parse(localStorage.getItem('tasks'))
+  const storedTasks2 = JSON.parse(localStorage.getItem('tasks'));
   test('updates the task completed property to be false', () => {
     expect(tasks[1].completed).toBeFalsy();
     expect(storedTasks2[1].completed).toBeFalsy();
@@ -142,7 +144,7 @@ describe('checked', () => {
 
 describe('buttonClear', () => {
   const clear = document.querySelector('.clear');
-  const tasks = [{ index: 1, completed: false, description: 'Do laundry' }, { index: 2, completed: true, description: 'Buy groceries' }]
+  const tasks = [{ index: 1, completed: false, description: 'Do laundry' }, { index: 2, completed: true, description: 'Buy groceries' }];
   addTask(tasks[0], clear);
   addTask(tasks[1], clear);
   storeTask(tasks);
@@ -157,4 +159,4 @@ describe('buttonClear', () => {
     expect(storedTasks.length).toBe(1);
     expect(storedTasks[0].description).toBe('Do laundry');
   });
-})
+});
